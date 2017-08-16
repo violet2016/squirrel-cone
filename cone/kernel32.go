@@ -47,10 +47,10 @@ func CloseHandle(handle syscall.Handle) error {
 	return syscall.CloseHandle(handle)
 }
 
-func ReadProcessMemory(hProcess syscall.Handle, lpBaseAddress, nSize uintptr) (lpBuffer []uint16, lpNumberOfBytesRead int, ok bool) {
+func ReadProcessMemory(hProcess syscall.Handle, lpBaseAddress, nSize uintptr) (lpBuffer []byte, lpNumberOfBytesRead int, ok bool) {
 
 	var nBytesRead int
-	buf := make([]uint16, nSize)
+	buf := make([]byte, nSize)
 	ret, _, _ := procReadProcessMemory.Call(
 		uintptr(hProcess),
 		lpBaseAddress,
@@ -58,7 +58,6 @@ func ReadProcessMemory(hProcess syscall.Handle, lpBaseAddress, nSize uintptr) (l
 		nSize,
 		uintptr(unsafe.Pointer(&nBytesRead)),
 	)
-
 	return buf, nBytesRead, ret != 0
 }
 

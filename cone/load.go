@@ -26,5 +26,6 @@ func LoadProcessRegions(handle syscall.Handle) []MemoryBasicInformation {
 		}
 		address = uintptr(info.BaseAddress + info.RegionSize)
 	}
+
 	return regions
 }
