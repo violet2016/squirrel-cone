@@ -1,11 +1,16 @@
 package analyze
 
-import "io/ioutil"
-import "encoding/json"
-import "log"
+import (
+	"encoding/json"
+	"io/ioutil"
+	"log"
+)
 
 type Signature struct {
-	Value []byte
+	Value string `json:"Value"`
+	// SigScanAddress int    `json:"SigScanAddress"`
+	// ASMSignature   bool   `json:"ASMSignature"`
+	// Key            string `json:"Key"`
 }
 
 func LoadSigsFile(filename string) []Signature {
